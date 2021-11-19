@@ -5,8 +5,9 @@ from PIL import Image, ImageEnhance
 image = cv2.imread('./sample_images/landscape-mist-pine_trees.jpg')
 im = Image.open("./sample_images/landscape-mist-pine_trees.jpg")
 
+
 # Version Official: Quite fast(acceptable) + based on Lecture Theory
-def brightAdjust(img, change):
+def bright(img, change):
     hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
     h, s, v = cv2.split(hsv)
     for i in range(0, len(v)):
@@ -21,12 +22,13 @@ def brightAdjust(img, change):
 
     final_hsv = cv2.merge((h, s, v))
     img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
-    readwriteImg.save_image(img, './sample_images/brightAdjust.jpg')
+    readwriteImg.save_image(img, './sample_images/bright.jpg')
 
     return img
 
+
 # Version 1: Chua kiem chung lai - Very fast
-def brightAdjust1(img, change):
+def bright1(img, change):
     hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
     h, s, v = cv2.split(hsv)
 
@@ -36,18 +38,22 @@ def brightAdjust1(img, change):
 
     final_hsv = cv2.merge((h, s, v))
     img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
-    readwriteImg.save_image(img, './sample_images/brightAdjust1.jpg')
+    readwriteImg.save_image(img, './sample_images/bright1.jpg')
 
     return img
 
+
 # Version 2: Su dung them lib: PIL
-def brightAdjust2(img, factor):
+def bright2(img, factor):
     enhancer = ImageEnhance.Brightness(img)
     im_output = enhancer.enhance(factor)
-    im_output.save('./sample_images/brightAdjust2.jpg')
+    im_output.save('./sample_images/bright2.jpg')
 
-    return  im_output
+    return im_output
 
-brightAdjust(image,-100)
-# brightAdjust1(image,100)
-# brightAdjust2(im,2)
+
+# bright(image, -100)
+
+# bright1(image,100)
+
+bright2(im,2)
